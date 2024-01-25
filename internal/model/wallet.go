@@ -1,5 +1,6 @@
-package main
+package model
 
-func main() {
-
+type Wallet struct {
+	Id      string  `json:"id"`
+	Balance float32 `json:"balance"`
 }
