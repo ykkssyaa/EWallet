@@ -7,7 +7,7 @@ import (
 )
 
 type WalletService interface {
-	CreateWallet(wallet model.Wallet) (string, error)
+	CreateWallet() (model.Wallet, error)
 	GetWalletById(id string) (model.Wallet, error)
 }
 
@@ -16,12 +16,10 @@ type WalletServiceImpl struct {
 	logger        *logger.Logger
 }
 
-func (w WalletServiceImpl) CreateWallet(wallet model.Wallet) (string, error) {
-	//TODO implement me
-	panic("implement me")
+func (w WalletServiceImpl) CreateWallet() (model.Wallet, error) {
+	return w.walletGateway.CreateWallet()
 }
 
 func (w WalletServiceImpl) GetWalletById(id string) (model.Wallet, error) {
-	//TODO implement me
-	panic("implement me")
+	return w.walletGateway.GetWalletById(id)
 }
