@@ -1,7 +1,16 @@
-version: "3"
+version: "3.8"
 
 services:
+  app:
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+          condition: service_healthy
+
   postgres:
+    container_name: postgres_db
     image: postgres:13
     environment:
       POSTGRES_DB: ${POSTGRES_DBNAME}
@@ -9,4 +18,10 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+
 
